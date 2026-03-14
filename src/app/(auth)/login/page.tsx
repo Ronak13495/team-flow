@@ -95,12 +95,6 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
-        .tf-syne { font-family: 'Syne', sans-serif; }
-        .tf-outfit { font-family: 'Outfit', sans-serif; }
-      `}</style> */}
-
       <div
         className="tf-outfit min-h-screen flex items-center justify-center p-6"
         style={{ background: "#e8edf8" }}
