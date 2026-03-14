@@ -232,7 +232,7 @@ async function handleSave() {
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="text-xl font-semibold text-gray-900 flex-1 mr-4 bg-transparent border-0 outline-none focus:bg-gray-50 rounded px-1 -mx-1 transition-colors"
+            className=" text-xl font-semibold text-gray-900 flex-1 mr-4 bg-transparent border-0 outline-none focus:bg-gray-50 rounded px-1 -mx-1 transition-colors"
             // bg-transparent border-0 outline-none makes it look like
             // plain text until focused, then shows a subtle background
           />
@@ -303,7 +303,7 @@ async function handleSave() {
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Write a comment..."
-                  className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="text-gray-900 placeholder:text-gray-400 flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   type="submit"
@@ -327,7 +327,7 @@ async function handleSave() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as TaskStatus)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                className="text-gray-900 placeholder:text-gray-400 w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
               >
                 {STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>
@@ -369,7 +369,7 @@ async function handleSave() {
               <select
                 value={assigneeId}
                 onChange={(e) => setAssigneeId(e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                className="text-gray-900 placeholder:text-gray-400 w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
               >
                 <option value="">Unassigned</option>
                 {members.map((member) => (
@@ -389,7 +389,7 @@ async function handleSave() {
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="text-gray-900 placeholder:text-gray-400 w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {dueDate && (
                 <p className="text-xs text-gray-400 mt-1">
