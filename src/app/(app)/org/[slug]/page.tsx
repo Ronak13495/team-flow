@@ -194,7 +194,7 @@ export default function OrgPage() {
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
                   placeholder="Project name"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+                  className="text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
                   autoFocus
                 />
                 <textarea
@@ -202,7 +202,7 @@ export default function OrgPage() {
                   onChange={(e) => setNewProjectDesc(e.target.value)}
                   placeholder="Description (optional)"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 resize-none"
+                  className="text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 resize-none"
                 />
                 <div className="flex gap-3">
                   <button

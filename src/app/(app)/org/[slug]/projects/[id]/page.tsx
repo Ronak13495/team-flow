@@ -157,7 +157,7 @@ function KanbanColumn({
             onChange={(e) => setNewTitle(e.target.value)}
             placeholder="Task title..."
             autoFocus
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+            className="text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
           />
           <div className="flex gap-2">
             <button
@@ -308,7 +308,7 @@ function handleTaskUpdate(updatedTask: Task) {
             onClick={() => router.push(`/org/${slug}`)}
             className="text-gray-400 hover:text-gray-600 text-sm"
           >
-            ← {slug}
+            ← Back
           </button>
           <span className="text-gray-300">/</span>
           <h1 className="font-semibold text-gray-900">{projectName}</h1>

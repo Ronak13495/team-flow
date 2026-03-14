@@ -84,7 +84,7 @@ export default function RegisterPage() {
               {...register("name")}
               type="text"
               placeholder="Alex Johnson"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -99,7 +99,7 @@ export default function RegisterPage() {
               {...register("email")}
               type="email"
               placeholder="you@example.com"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -114,7 +114,7 @@ export default function RegisterPage() {
               {...register("password")}
               type="password"
               placeholder="••••••••"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
@@ -129,7 +129,7 @@ export default function RegisterPage() {
               {...register("confirmPassword")}
               type="password"
               placeholder="••••••••"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className=" text-gray-900 placeholder:text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
