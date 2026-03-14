@@ -1,0 +1,210 @@
+// prisma/schema.prisma
+
+// This block tells Prisma what database to use and where to find it
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── USER TABLE ────────────────────────────────────────────────────────────────
+
+model User {
+  id             String    @id @default(cuid()) // unique ID, auto-generated
+  name           String? // ? means optional (nullable)
+  email          String    @unique // must be unique across all users
+  emailVerified  DateTime? // set when email is verified
+  image          String? // profile picture URL
+  hashedPassword String? // null for OAuth users (Google etc)
+  createdAt      DateTime  @default(now()) // auto-set when record is created
+  updatedAt      DateTime  @updatedAt // auto-updated every time record changes
+
+  // These are "relations" — they tell Prisma this user can have many accounts/sessions
+  // Auth.js needs these to work
+  accounts Account[]
+  sessions Session[]
+
+  organisations OrganisationMember[]
+  assignedTasks Task[]               @relation("TaskAssignee")
+  comments      Comment[]            @relation("CommentAuthor")
+  // These tell Prisma "a User can appear in many of these related tables"
+  // The string labels like "TaskAssignee" match the relation names
+  // we used in Task and Comment above — they pair them up correctly
+}
+
+// ─── AUTH.JS REQUIRED TABLES ───────────────────────────────────────────────────
+// You don't interact with these directly — Auth.js manages them automatically
+// They handle OAuth tokens, session cookies, and verification emails
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String // foreign key → User
+  type              String
+  provider          String // e.g. "google", "github"
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // onDelete: Cascade means: if the User is deleted, delete their Accounts too
+
+  @@unique([provider, providerAccountId]) // one account per provider per user
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// An Enum is a fixed set of allowed values.
+// The database will REJECT any value not in this list —
+// so you can never accidentally save role: "SUPERUSER" by mistake.
+enum MemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// The Organisation model — represents a team workspace
+model Organisation {
+  id   String @id @default(cuid())
+  name String
+  slug String @unique
+  // slug is a URL-friendly version of the name e.g. "Acme Corp" → "acme-corp"
+  // @unique means no two orgs can have the same slug
+  // We'll use this in URLs like /org/acme-corp/projects
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations — one org has many members and many projects
+  members  OrganisationMember[]
+  projects Project[]
+}
+
+// This is a JOIN TABLE — it sits between User and Organisation.
+// Instead of storing roles directly on User or Organisation,
+// we create a separate table that represents the RELATIONSHIP.
+// This way one user can be ADMIN in org A and MEMBER in org B.
+model OrganisationMember {
+  id       String     @id @default(cuid())
+  role     MemberRole @default(MEMBER)
+  joinedAt DateTime   @default(now())
+
+  // Foreign keys — these columns store the IDs that link to other tables
+  orgId  String
+  userId String
+
+  // @relation defines HOW the foreign key links to the other table.
+  // fields: [orgId] — the column in THIS table
+  // references: [id] — the column in the OTHER table it points to
+  // onDelete: Cascade — if the org is deleted, delete all its members too
+  organisation Organisation @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // @@unique ensures a user can only be a member of the same org ONCE.
+  // Without this, you could accidentally add someone to the same org twice.
+  @@unique([orgId, userId])
+}
+
+// Project belongs to an Organisation
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  dueDate     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign key to Organisation
+  orgId        String
+  organisation Organisation @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  tasks Task[]
+}
+
+// Task belongs to a Project, optionally assigned to a User
+model Task {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  status      TaskStatus   @default(TODO)
+  priority    TaskPriority @default(MEDIUM)
+  dueDate     DateTime?
+  position    Int          @default(0)
+  // position is used for drag-and-drop ordering within a column.
+  // Lower number = higher up on the board.
+
+  deletedAt DateTime?
+  // deletedAt is a "soft delete" field.
+  // Instead of removing rows from the database (hard delete),
+  // we set this timestamp. The row still exists but we filter
+  // it out in queries. This preserves history and allows undo.
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectId  String
+  assigneeId String?
+  // assigneeId is nullable (String?) because tasks can be unassigned
+
+  project  Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignee User?   @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  // onDelete: SetNull — if the user is deleted, set assigneeId to null
+  // instead of deleting the task. The task survives, just unassigned.
+
+  comments Comment[]
+}
+
+// Comment belongs to a Task, written by a User
+model Comment {
+  id        String   @id @default(cuid())
+  body      String
+  createdAt DateTime @default(now())
+
+  taskId   String
+  authorId String
+
+  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  author User @relation("CommentAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+}
