@@ -16,6 +16,7 @@ const loginSchema = z.object({
 })
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   // The adapter connects Auth.js to YOUR database.
   // It automatically saves users, sessions, and accounts
   // to the tables we defined in schema.prisma
