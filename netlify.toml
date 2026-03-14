@@ -1,0 +1,13 @@
+# netlify.toml
+# This file tells Netlify how to build and run your Next.js app.
+# .toml is a config file format — think of it like JSON but more readable.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  # This plugin makes Next.js features like API routes, Server Components,
+  # and dynamic routes work correctly on Netlify.
+  # Without it, only static pages would work — API routes would return 404.
