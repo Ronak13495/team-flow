@@ -94,9 +94,9 @@ export default function LoginPage() {
   const badge = BADGE_STATES[badgeIndex]
 
   return (
-    <>
+    
       <div
-        className="tf-outfit min-h-screen flex items-center justify-center p-6"
+        className="  min-h-screen flex items-center justify-center p-6"
         style={{ background: "#e8edf8" }}
       >
         <div
@@ -129,7 +129,7 @@ export default function LoginPage() {
 
             {/* Logo */}
             <div
-              className="tf-syne relative z-10 text-3xl font-bold"
+              className="  relative z-10 text-3xl font-bold"
               style={{ color: "#1e2b6e", letterSpacing: "-0.3px" }}
             >
               Team<span style={{ color: "#4361ee" }}>Flow</span>
@@ -156,7 +156,7 @@ export default function LoginPage() {
 
               {/* Heading with animated badge */}
               <h2
-                className="tf-syne font-bold mb-2"
+                className="  font-bold mb-2"
                 style={{ fontSize: 34, color: "#1e2b6e", letterSpacing: "-0.8px", lineHeight: 1.1 }}
               >
                 Your work,
@@ -164,7 +164,7 @@ export default function LoginPage() {
 
               {/* Animated status badge */}
               <div
-                className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 mb-5 w-fit tf-syne font-bold ${badge.bg} ${badge.text_color}`}
+                className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 mb-5 w-fit   font-bold ${badge.bg} ${badge.text_color}`}
                 style={{
                   fontSize: 30,
                   letterSpacing: "-0.5px",
@@ -178,7 +178,7 @@ export default function LoginPage() {
               </div>
 
               <p
-                className="tf-outfit mb-8"
+                className="  mb-8"
                 style={{ fontSize: 16, color: "#7284b8", fontWeight: 300, lineHeight: 1.6 }}
               >
                 Manage projects, assign tasks,<br />
@@ -214,13 +214,13 @@ export default function LoginPage() {
           {/* ── RIGHT PANEL ── */}
           <div className="bg-white flex flex-col justify-center p-12">
             <h1
-              className="tf-syne font-bold mb-1"
+              className="  font-bold mb-1"
               style={{ fontSize: 24, color: "#1e2b6e" }}
             >
               Welcome back
             </h1>
             <p
-              className="tf-outfit mb-6"
+              className="  mb-6"
               style={{ fontSize: 13, color: "#aab4cc", fontWeight: 300 }}
             >
               Sign in to continue to TeamFlow
@@ -288,7 +288,7 @@ export default function LoginPage() {
                     color: "#1e2b6e",
                     background: "#f8faff",
                     outline: "none",
-                    fontFamily: "'Outfit', sans-serif",
+                   
                   }}
                 />
                 {errors.email && (
@@ -316,7 +316,6 @@ export default function LoginPage() {
                     color: "#1e2b6e",
                     background: "#f8faff",
                     outline: "none",
-                    fontFamily: "'Outfit', sans-serif",
                   }}
                 />
                 {errors.password && (
@@ -347,7 +346,6 @@ export default function LoginPage() {
                   fontWeight: 500,
                   cursor: isLoading ? "not-allowed" : "pointer",
                   opacity: isLoading ? 0.6 : 1,
-                  fontFamily: "'Outfit', sans-serif",
                   marginTop: 4,
                   transition: "background 0.2s",
                 }}
@@ -376,6 +374,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-    </>
+    
   )
 }
