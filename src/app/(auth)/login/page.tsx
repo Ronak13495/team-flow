@@ -68,7 +68,7 @@ return (
       <div className="hidden lg:flex lg:w-1/2 relative bg-gray-900 flex-col justify-between p-12">
         {/* Background image */}
         <Image
-          src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&q=80"
+          src="public/login-bg.jpeg"
           alt="TeamFlow workspace"
           fill
           className="object-cover opacity-40"
