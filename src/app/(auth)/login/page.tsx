@@ -63,7 +63,7 @@ export default function LoginPage() {
         setBadgeIndex((i) => (i + 1) % BADGE_STATES.length)
         setBadgeVisible(true)
       }, 300)
-    }, 1800)
+    }, 2800)
 
     return () => clearInterval(interval)
     // Cleanup — stop the interval when the component unmounts
@@ -95,11 +95,11 @@ export default function LoginPage() {
 
   return (
     <>
-      <style>{`
+      {/* <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
         .tf-syne { font-family: 'Syne', sans-serif; }
         .tf-outfit { font-family: 'Outfit', sans-serif; }
-      `}</style>
+      `}</style> */}
 
       <div
         className="tf-outfit min-h-screen flex items-center justify-center p-6"
@@ -135,7 +135,7 @@ export default function LoginPage() {
 
             {/* Logo */}
             <div
-              className="tf-syne relative z-10 text-xl font-bold"
+              className="tf-syne relative z-10 text-3xl font-bold"
               style={{ color: "#1e2b6e", letterSpacing: "-0.3px" }}
             >
               Team<span style={{ color: "#4361ee" }}>Flow</span>
@@ -185,7 +185,7 @@ export default function LoginPage() {
 
               <p
                 className="tf-outfit mb-8"
-                style={{ fontSize: 14, color: "#7284b8", fontWeight: 300, lineHeight: 1.6 }}
+                style={{ fontSize: 16, color: "#7284b8", fontWeight: 300, lineHeight: 1.6 }}
               >
                 Manage projects, assign tasks,<br />
                 and ship with your team — faster.
@@ -244,7 +244,8 @@ export default function LoginPage() {
                 i
               </div>
               <p style={{ fontSize: 12, color: "#4361ee", lineHeight: 1.5 }}>
-                Demo account — Email:{" "}
+                Demo account <br />
+                Email:{" "}
                 <code
                   style={{
                     background: "#dde5ff",
@@ -289,7 +290,7 @@ export default function LoginPage() {
                     border: "1.5px solid #e8edf8",
                     borderRadius: 10,
                     padding: "11px 14px",
-                    fontSize: 14,
+                    fontSize: 16,
                     color: "#1e2b6e",
                     background: "#f8faff",
                     outline: "none",
@@ -317,7 +318,7 @@ export default function LoginPage() {
                     border: "1.5px solid #e8edf8",
                     borderRadius: 10,
                     padding: "11px 14px",
-                    fontSize: 14,
+                    fontSize: 16,
                     color: "#1e2b6e",
                     background: "#f8faff",
                     outline: "none",
@@ -348,7 +349,7 @@ export default function LoginPage() {
                   border: "none",
                   borderRadius: 10,
                   padding: "13px",
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: 500,
                   cursor: isLoading ? "not-allowed" : "pointer",
                   opacity: isLoading ? 0.6 : 1,
