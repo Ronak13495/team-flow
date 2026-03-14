@@ -63,6 +63,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-sm mb-4 text-red-500"> For testing use test@gmail.com as email and 12345678 as password</div>
       <div className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h1>
         <p className="text-gray-500 mb-8">Sign in to your TeamFlow account</p>
