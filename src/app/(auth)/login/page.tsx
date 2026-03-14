@@ -11,7 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 
 // Define the form shape with Zod — same pattern as the API
 const loginSchema = z.object({
@@ -64,49 +63,42 @@ export default function LoginPage() {
 return (
     <div className="min-h-screen flex">
 
-      {/* ── Left panel — image + branding ── */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-gray-900 flex-col justify-between p-12">
-        {/* Background image */}
-        <Image
-          src="/images/login-bg.jpeg"
-          alt="TeamFlow workspace"
-          fill
-          className="object-cover opacity-40"
-        />
+     {/* ── Left panel — solid background + branding ── */}
+<div className="hidden lg:flex lg:w-1/2 bg-blue-600 flex-col justify-between p-12">
+  
+  {/* Top — logo */}
+  <div>
+    <span className="font-bold text-2xl text-white tracking-tight">
+      Team<span className="text-blue-200">Flow</span>
+    </span>
+  </div>
 
-        {/* Content sits on top of the image */}
-        <div className="relative z-10">
-          {/* z-10 ensures this sits above the background image */}
-          <span className="font-bold text-2xl text-white tracking-tight">
-            Team<span className="text-blue-400">Flow</span>
-          </span>
-        </div>
+  {/* Middle — main copy */}
+  <div>
+    <h2 className="text-4xl font-bold text-white leading-tight mb-4">
+      Manage projects.<br />
+      Ship faster.<br />
+      Work better.
+    </h2>
+    <p className="text-blue-100 text-lg">
+      The project management tool built for modern teams.
+    </p>
+  </div>
 
-        <div className="relative z-10">
-          <h2 className="text-4xl font-bold text-white leading-tight mb-4">
-            Manage projects.<br />
-            Ship faster.<br />
-            Work better.
-          </h2>
-          <p className="text-gray-300 text-lg">
-            The project management tool built for modern teams.
-          </p>
-        </div>
-
-        {/* Bottom quote */}
-        <div className="relative z-10 border-l-2 border-blue-400 pl-4">
-          <p className="text-gray-300 text-sm italic">
-            "TeamFlow helped our team cut delivery time in half."
-          </p>
-          <p className="text-gray-400 text-xs mt-1">
-            — Alex Johnson, Engineering Lead
-          </p>
-        </div>
-      </div>
+  {/* Bottom — quote */}
+    <div className="border-l-2 border-blue-400 pl-4">
+      <p className="text-blue-100 text-sm italic">
+        &quot;TeamFlow helped our team cut delivery time in half.&quot;
+      </p>
+      <p className="text-blue-200 text-xs mt-1">
+        — Alex Johnson, Engineering Lead
+      </p>
+    </div>
+  </div>
 
       {/* ── Right panel — login form ── */}
-      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-8 py-12 bg-gray-50">
-        <div className="w-full max-w-md">
+      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-12 py-12 bg-gray-500">
+        <div className="w-full max-w-sm">
 
           {/* Mobile logo — only shows on small screens where left panel is hidden */}
           <div className="lg:hidden mb-8">
